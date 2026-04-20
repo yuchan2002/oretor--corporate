@@ -1,12 +1,621 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APEX - Coming Soon</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEX — Executive Intensive Tokyo</title>
+<meta name="description" content="パークコート赤坂檜町ザ・タワーで開催する、1日完結型のエグゼクティブ・リトリート。AIとデータ分析による経営意思決定を、6名限定で深化させる招待制プログラム。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Shippori+Mincho:wght@400;500;600&family=Noto+Serif+JP:wght@300;400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #0a0a0b;
+    color: #e8e4dc;
+    font-family: 'Noto Serif JP', 'Shippori Mincho', serif;
+    font-weight: 300;
+    line-height: 1.8;
+    overflow-x: hidden;
+    letter-spacing: 0.02em;
+  }
+  ::selection { background: #b89d5b; color: #0a0a0b; }
+
+  :root {
+    --ink: #e8e4dc;
+    --ink-dim: #a8a39a;
+    --ink-faint: #5c5851;
+    --gold: #b89d5b;
+    --gold-dim: #8a7543;
+    --bg: #0a0a0b;
+    --bg-elev: #121213;
+    --border: rgba(232, 228, 220, 0.08);
+    --border-soft: rgba(232, 228, 220, 0.04);
+  }
+
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 20px 40px; display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(180deg, rgba(10,10,11,0.95) 0%, rgba(10,10,11,0) 100%);
+    backdrop-filter: blur(8px);
+  }
+  .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 18px; letter-spacing: 0.3em; color: var(--gold); }
+  .nav-brand span { color: var(--ink-dim); font-size: 11px; margin-left: 8px; letter-spacing: 0.2em; }
+  .nav-cta { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.25em; color: var(--ink-dim); text-decoration: none; border: 1px solid var(--border); padding: 10px 22px; transition: all 0.3s; }
+  .nav-cta:hover { color: var(--gold); border-color: var(--gold); }
+  @media (max-width: 640px) { .nav { padding: 16px 20px; } .nav-brand { font-size: 14px; } .nav-brand span { display:none; } .nav-cta { padding: 8px 14px; font-size: 10px; } }
+
+  .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 140px 10% 80px; position: relative; border-bottom: 1px solid var(--border); }
+  .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: radial-gradient(ellipse at top right, rgba(184,157,91,0.08) 0%, transparent 60%); pointer-events: none; }
+  .hero-tag { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 32px; text-transform: uppercase; }
+  .hero-tag::before { content: '—'; margin-right: 12px; color: var(--ink-faint); }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 11vw, 168px); font-weight: 300; line-height: 0.9; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--ink); }
+  .hero-title em { font-style: italic; color: var(--gold); font-weight: 400; }
+  .hero-sub { font-family: 'Shippori Mincho', serif; font-size: clamp(16px, 2vw, 22px); font-weight: 400; color: var(--ink-dim); max-width: 680px; line-height: 1.8; margin-top: 32px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 48px; margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border); }
+  .meta-item { font-family: 'Jost', sans-serif; }
+  .meta-label { font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 8px; }
+  .meta-value { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink); font-weight: 400; }
+  .meta-value.price { color: var(--gold); font-style: italic; }
+  @media (max-width: 640px) { .hero { padding: 120px 24px 60px; } .hero-meta { gap: 28px; } }
+
+  section { padding: 120px 10%; position: relative; }
+  .section-num { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.4em; color: var(--gold-dim); margin-bottom: 24px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 88px); font-weight: 300; line-height: 1; letter-spacing: -0.01em; color: var(--ink); margin-bottom: 60px; max-width: 900px; }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-lead { font-family: 'Shippori Mincho', serif; font-size: 18px; line-height: 2; color: var(--ink-dim); max-width: 720px; }
+  @media (max-width: 640px) { section { padding: 80px 24px; } .section-title { margin-bottom: 40px; } }
+
+  .invitation { border-top: 1px solid var(--border); }
+  .invite-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-top: 40px; }
+  .invite-list { list-style: none; }
+  .invite-list li { padding: 24px 0; border-bottom: 1px solid var(--border-soft); display: flex; align-items: baseline; gap: 24px; font-family: 'Shippori Mincho', serif; font-size: 17px; color: var(--ink); }
+  .invite-list li::before { content: attr(data-num); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--gold); min-width: 24px; }
+  .invite-aside { font-family: 'Shippori Mincho', serif; font-size: 16px; color: var(--ink-dim); padding: 40px; border: 1px solid var(--border); background: var(--bg-elev); }
+  .invite-aside h4 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--gold); margin-bottom: 20px; font-style: italic; }
+  @media (max-width: 900px) { .invite-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .program { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-elev) 100%); border-top: 1px solid var(--border); }
+  .timeline { margin-top: 40px; }
+  .time-row { display: grid; grid-template-columns: 140px 1fr 2fr; gap: 40px; padding: 32px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+  .time-row:last-child { border-bottom: none; }
+  .time-clock { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; color: var(--gold); font-weight: 300; }
+  .time-title { font-family: 'Shippori Mincho', serif; font-size: 20px; color: var(--ink); font-weight: 500; }
+  .time-desc { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--ink-dim); line-height: 1.9; }
+  @media (max-width: 768px) { .time-row { grid-template-columns: 1fr; gap: 8px; padding: 24px 0; } .time-clock { font-size: 22px; } .time-title { font-size: 17px; } }
+
+  .venue { border-top: 1px solid var(--border); }
+  .venue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 40px; }
+  .venue-visual { aspect-ratio: 3/4; background: linear-gradient(135deg, #1a1a1c 0%, #0a0a0b 100%); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .venue-visual::before { content: ''; position: absolute; inset: 20px; border: 1px solid var(--gold-dim); opacity: 0.3; }
+  .venue-visual-inner { text-align: center; padding: 40px; }
+  .venue-visual-label { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 20px; }
+  .venue-visual-name { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-style: italic; color: var(--ink); font-weight: 300; line-height: 1.2; }
+  .venue-visual-meta { font-family: 'Shippori Mincho', serif; font-size: 13px; color: var(--ink-dim); margin-top: 24px; letter-spacing: 0.1em; }
+  .venue-copy h3 { font-family: 'Cormorant Garamond', serif; font-size: 44px; font-weight: 300; color: var(--ink); margin-bottom: 24px; line-height: 1.2; }
+  .venue-copy p { font-family: 'Shippori Mincho', serif; font-size: 16px; color: var(--ink-dim); line-height: 2; margin-bottom: 24px; }
+  .venue-specs { list-style: none; margin-top: 32px; }
+  .venue-specs li { display: flex; padding: 14px 0; border-bottom: 1px solid var(--border-soft); font-family: 'Noto Serif JP', serif; font-size: 14px; }
+  .venue-specs .label { color: var(--ink-faint); min-width: 120px; letter-spacing: 0.1em; }
+  .venue-specs .value { color: var(--ink); }
+  @media (max-width: 900px) { .venue-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .investment { border-top: 1px solid var(--border); }
+  .breakdown { margin-top: 40px; max-width: 840px; }
+  .break-row { display: grid; grid-template-columns: 1fr auto; gap: 40px; padding: 24px 0; border-bottom: 1px solid var(--border-soft); align-items: baseline; }
+  .break-item { font-family: 'Shippori Mincho', serif; font-size: 16px; color: var(--ink); }
+  .break-sub { font-family: 'Noto Serif JP', serif; font-size: 12px; color: var(--ink-faint); display: block; margin-top: 4px; letter-spacing: 0.05em; }
+  .break-amt { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--ink-dim); font-style: italic; }
+  .break-total { display: grid; grid-template-columns: 1fr auto; gap: 40px; padding: 32px 0 0; border-top: 2px solid var(--gold); margin-top: 24px; align-items: baseline; }
+  .break-total .break-item { font-size: 20px; color: var(--gold); letter-spacing: 0.1em; }
+  .break-total .break-amt { font-size: 36px; color: var(--gold); font-weight: 400; }
+
+  .host { background: var(--bg-elev); border-top: 1px solid var(--border); }
+  .host-inner { max-width: 840px; }
+  .host-info { margin-top: 48px; padding: 48px; border: 1px solid var(--border); background: var(--bg); }
+  .host-info h4 { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--ink); font-weight: 300; margin-bottom: 24px; }
+  .host-info dl { display: grid; grid-template-columns: 160px 1fr; gap: 16px 32px; font-family: 'Noto Serif JP', serif; font-size: 14px; }
+  .host-info dt { color: var(--ink-faint); letter-spacing: 0.1em; }
+  .host-info dd { color: var(--ink); }
+  @media (max-width: 640px) { .host-info { padding: 32px 24px; } .host-info dl { grid-template-columns: 110px 1fr; gap: 12px 20px; font-size: 13px; } }
+
+  .application { border-top: 1px solid var(--border); text-align: center; padding: 140px 10%; }
+  .app-pre { font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 32px; }
+  .app-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 8vw, 96px); font-weight: 300; line-height: 1; margin-bottom: 32px; }
+  .app-title em { font-style: italic; color: var(--gold); }
+  .app-lead { font-family: 'Shippori Mincho', serif; font-size: 17px; color: var(--ink-dim); max-width: 580px; margin: 0 auto 56px; line-height: 2; }
+  .app-cta { display: inline-block; font-family: 'Jost', sans-serif; font-size: 12px; letter-spacing: 0.4em; color: var(--bg); background: var(--gold); padding: 22px 56px; text-decoration: none; border: 1px solid var(--gold); transition: all 0.4s; text-transform: uppercase; }
+  .app-cta:hover { background: transparent; color: var(--gold); }
+  .app-note { font-family: 'Noto Serif JP', serif; font-size: 12px; color: var(--ink-faint); margin-top: 32px; letter-spacing: 0.1em; }
+
+  .faq { border-top: 1px solid var(--border); }
+  .faq-item { border-bottom: 1px solid var(--border-soft); padding: 28px 0; }
+  .faq-q { font-family: 'Shippori Mincho', serif; font-size: 17px; color: var(--ink); font-weight: 500; display: flex; align-items: baseline; gap: 20px; }
+  .faq-q::before { content: 'Q'; font-family: 'Cormorant Garamond', serif; font-style: italic; color: var(--gold); font-size: 20px; }
+  .faq-a { font-family: 'Noto Serif JP', serif; font-size: 14px; color: var(--ink-dim); margin-top: 16px; padding-left: 36px; line-height: 2; }
+
+  footer { background: #050506; padding: 80px 10% 40px; border-top: 1px solid var(--border); }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 60px; padding-bottom: 60px; border-bottom: 1px solid var(--border-soft); }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--gold); margin-bottom: 16px; letter-spacing: 0.1em; }
+  .footer-desc { font-family: 'Noto Serif JP', serif; font-size: 13px; color: var(--ink-dim); line-height: 1.9; }
+  .footer-title { font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 0.3em; color: var(--ink-faint); margin-bottom: 20px; text-transform: uppercase; }
+  .footer-list { list-style: none; }
+  .footer-list li { font-family: 'Noto Serif JP', serif; font-size: 13px; color: var(--ink-dim); padding: 6px 0; line-height: 1.8; }
+  .footer-list a { color: var(--ink-dim); text-decoration: none; transition: color 0.3s; }
+  .footer-list a:hover { color: var(--gold); }
+  .footer-bottom { padding-top: 32px; display: flex; justify-content: space-between; font-family: 'Jost', sans-serif; font-size: 11px; color: var(--ink-faint); letter-spacing: 0.2em; }
+  .legal-copy { font-family: 'Noto Serif JP', serif; font-size: 11px; color: var(--ink-faint); line-height: 2; margin-top: 40px; padding: 32px; border: 1px solid var(--border-soft); letter-spacing: 0.05em; }
+  .legal-copy strong { color: var(--ink-dim); font-weight: 500; display: block; margin-bottom: 8px; letter-spacing: 0.15em; font-size: 10px; text-transform: uppercase; }
+  .legal-copy dl { display: grid; grid-template-columns: 160px 1fr; gap: 10px 20px; margin-top: 16px; }
+  .legal-copy dt { color: var(--ink-faint); }
+  .legal-copy dd { color: var(--ink-dim); }
+  @media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } .footer-bottom { flex-direction: column; gap: 16px; } .legal-copy dl { grid-template-columns: 1fr; gap: 4px 0; } .legal-copy dt { margin-top: 12px; } }
+
+  .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1.2s ease forwards; }
+  .delay-1 { animation-delay: 0.15s; }
+  .delay-2 { animation-delay: 0.3s; }
+  .delay-3 { animation-delay: 0.45s; }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+</style>
 </head>
 <body>
-  <h1>APEX</h1>
-  <p>Coming Soon</p>
+  <nav class="nav">
+  <div class="nav-brand">APEX <span>EXECUTIVE INTENSIVE</span></div>
+  <a href="#application" class="nav-cta">Apply</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag fade-in">By Invitation — 2026 Spring Edition</div>
+  <h1 class="hero-title fade-in delay-1">
+    APEX<br>
+    <em>Executive</em><br>
+    Intensive.
+  </h1>
+  <p class="hero-sub fade-in delay-2">
+    東京・赤坂檜町。<br>
+    静謐な邸宅空間で、1日を投下する。<br>
+    AIとデータが切り拓く、次の意思決定のかたち。
+  </p>
+  <div class="hero-meta fade-in delay-3">
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">2026.06.21 SAT</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Venue</div>
+      <div class="meta-value">Park Court Akasaka</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Capacity</div>
+      <div class="meta-value">6 Seats</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Investment</div>
+      <div class="meta-value price">¥650,000</div>
+    </div>
+  </div>
+</header>
+
+<section class="invitation" id="invitation">
+  <div class="section-num">I — Invitation</div>
+  <h2 class="section-title">情報が飽和する時代、<br>意思決定は<em>芸術</em>に近づく。</h2>
+  <p class="section-lead">
+    このリトリートは、データと直観を往復しながら「次の一手」を再設計したい経営層のための、1日完結型の招待制プログラムです。主宰者が独自に開発した分析フレームワークを、少人数・対話形式で共有します。
+  </p>
+
+  <div class="invite-grid">
+    <ul class="invite-list">
+      <li data-num="01">年商1億円以上の経営者・創業者</li>
+      <li data-num="02">上場企業の役員およびC-suite</li>
+      <li data-num="03">独立系プロフェッショナル・投資家</li>
+      <li data-num="04">事業承継・次世代経営を担う方</li>
+      <li data-num="05">AI・データ活用の実装を探索する方</li>
+    </ul>
+    <aside class="invite-aside">
+      <h4>選考について</h4>
+      <p>本プログラムは応募制・選考制です。お申込後、事務局にて参加意図・ご経歴を確認のうえ、ご案内を差し上げます。参加者の機密保持と空気感を保つため、少人数・同水準の方々のみで構成します。</p>
+    </aside>
+  </div>
+</section>
+
+<section class="program" id="program">
+  <div class="section-num">II — Program</div>
+  <h2 class="section-title">1日を、<em>濃密に</em>設計する。</h2>
+  <p class="section-lead">
+    朝から夜まで、9時間の連続したセッション。講義・対話・個別相談・会食を織り交ぜ、参加者全員が「自社に戻った翌日から変えられる何か」を持ち帰るよう設計しています。
+  </p>
+
+  <div class="timeline">
+    <div class="time-row">
+      <div class="time-clock">10:00</div>
+      <div><div class="time-title">Welcome Reception</div></div>
+      <div class="time-desc">参加者同士の自己紹介と、1日の目的共有。ウェルカムドリンクとともに、静かに1日を始めます。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">10:30</div>
+      <div><div class="time-title">Session I — AIと経営の交差点</div></div>
+      <div class="time-desc">生成AI・機械学習の現在地と、経営における実装の解像度。ケーススタディを交えた90分の講義＋対話形式セッション。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">12:30</div>
+      <div><div class="time-title">Executive Lunch</div></div>
+      <div class="time-desc">シェフ監修のコースランチ。参加者同士の対話のための時間として設計しています。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">14:00</div>
+      <div><div class="time-title">Session II — データドリブン意思決定の構造</div></div>
+      <div class="time-desc">データを「見る」から「判断する」へ。独自の分析フレームワークを、参加者の課題に適用しながら解説します。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">16:00</div>
+      <div><div class="time-title">Session III — Private Consultation</div></div>
+      <div class="time-desc">参加者1名ごとに90分の個別セッション。自社の具体的な課題について、1対1で深く掘り下げます。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">17:30</div>
+      <div><div class="time-title">Networking Reception</div></div>
+      <div class="time-desc">同水準の経営者同士による、静かで深い対話の時間。一生のつながりが生まれる場として設計しています。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">19:00</div>
+      <div><div class="time-title">Private Dinner</div></div>
+      <div class="time-desc">1日の締めくくり。オフレコで語られる本音の対話を通じ、リトリートを完結させます。</div>
+    </div>
+  </div>
+</section>
+
+<section class="venue" id="venue">
+  <div class="section-num">III — Venue</div>
+  <h2 class="section-title">場が、<em>思考の質</em>を決める。</h2>
+
+  <div class="venue-grid">
+    <div class="venue-visual">
+      <div class="venue-visual-inner">
+        <div class="venue-visual-label">Tokyo · Akasaka</div>
+        <div class="venue-visual-name">Park Court<br>Akasaka<br><em>Hinokicho</em><br>The Tower</div>
+        <div class="venue-visual-meta">港区赤坂9-5-1</div>
+      </div>
+    </div>
+    <div class="venue-copy">
+      <h3>赤坂檜町、<br>東京随一の邸宅タワー。</h3>
+      <p>
+        六本木ミッドタウンに隣接し、檜町公園を見下ろす44階建ての超高級レジデンス。その上層階に位置する会員制ラウンジを、1日貸し切って開催します。
+      </p>
+      <p>
+        外界から遮断された静謐な空間、東京の夜景を望むパノラマ、手入れの行き届いた邸宅品質のしつらえ。この場で過ごす1日が、日常の意思決定とは異なる解像度を与えます。
+      </p>
+      <ul class="venue-specs">
+        <li><span class="label">所在地</span><span class="value">東京都港区赤坂9-5-1</span></li>
+        <li><span class="label">最寄駅</span><span class="value">六本木駅 徒歩4分 / 乃木坂駅 徒歩5分</span></li>
+        <li><span class="label">会場</span><span class="value">レジデンシャル・ラウンジ（貸切）</span></li>
+        <li><span class="label">ドレスコード</span><span class="value">Smart Casual</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="investment" id="investment">
+  <div class="section-num">IV — Investment</div>
+  <h2 class="section-title">1日で、<em>10年分</em>を動かす。</h2>
+  <p class="section-lead">
+    参加費には、会場・飲食・終日セッション・個別コンサルティング・アフターサポート・専用コミュニティへの永年アクセスまでを含みます。リトリート当日のみで完結しない、長期的な変化をつくる設計です。
+  </p>
+
+  <div class="breakdown">
+    <div class="break-row">
+      <div class="break-item">会場・ラウンジ終日貸切<span class="break-sub">Park Court Akasaka Hinokicho — Residential Lounge</span></div>
+      <div class="break-amt">¥80,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">昼食・ディナー・ドリンク<span class="break-sub">Chef's Course Lunch &amp; Private Dinner</span></div>
+      <div class="break-amt">¥60,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">終日セッション（計3セッション / 約6時間）<span class="break-sub">Lectures, Workshops &amp; Group Dialogue</span></div>
+      <div class="break-amt">¥240,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">個別コンサルティング（90分 / 1対1）<span class="break-sub">Private Consultation Session</span></div>
+      <div class="break-amt">¥120,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">3ヶ月間のアフターサポート<span class="break-sub">Post-Retreat Follow-up via Private Channel</span></div>
+      <div class="break-amt">¥100,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">エグゼクティブ・コミュニティ永年アクセス<span class="break-sub">Alumni Network &amp; Quarterly Gathering</span></div>
+      <div class="break-amt">¥50,000</div>
+    </div>
+    <div class="break-total">
+      <div class="break-item">TOTAL · 一括</div>
+      <div class="break-amt">¥650,000</div>
+    </div>
+  </div>
+</section><nav class="nav">
+  <div class="nav-brand">APEX <span>EXECUTIVE INTENSIVE</span></div>
+  <a href="#application" class="nav-cta">Apply</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-tag fade-in">By Invitation — 2026 Spring Edition</div>
+  <h1 class="hero-title fade-in delay-1">
+    APEX<br>
+    <em>Executive</em><br>
+    Intensive.
+  </h1>
+  <p class="hero-sub fade-in delay-2">
+    東京・赤坂檜町。<br>
+    静謐な邸宅空間で、1日を投下する。<br>
+    AIとデータが切り拓く、次の意思決定のかたち。
+  </p>
+  <div class="hero-meta fade-in delay-3">
+    <div class="meta-item">
+      <div class="meta-label">Date</div>
+      <div class="meta-value">2026.06.21 SAT</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Venue</div>
+      <div class="meta-value">Park Court Akasaka</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Capacity</div>
+      <div class="meta-value">6 Seats</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Investment</div>
+      <div class="meta-value price">¥650,000</div>
+    </div>
+  </div>
+</header>
+
+<section class="invitation" id="invitation">
+  <div class="section-num">I — Invitation</div>
+  <h2 class="section-title">情報が飽和する時代、<br>意思決定は<em>芸術</em>に近づく。</h2>
+  <p class="section-lead">
+    このリトリートは、データと直観を往復しながら「次の一手」を再設計したい経営層のための、1日完結型の招待制プログラムです。主宰者が独自に開発した分析フレームワークを、少人数・対話形式で共有します。
+  </p>
+
+  <div class="invite-grid">
+    <ul class="invite-list">
+      <li data-num="01">年商1億円以上の経営者・創業者</li>
+      <li data-num="02">上場企業の役員およびC-suite</li>
+      <li data-num="03">独立系プロフェッショナル・投資家</li>
+      <li data-num="04">事業承継・次世代経営を担う方</li>
+      <li data-num="05">AI・データ活用の実装を探索する方</li>
+    </ul>
+    <aside class="invite-aside">
+      <h4>選考について</h4>
+      <p>本プログラムは応募制・選考制です。お申込後、事務局にて参加意図・ご経歴を確認のうえ、ご案内を差し上げます。参加者の機密保持と空気感を保つため、少人数・同水準の方々のみで構成します。</p>
+    </aside>
+  </div>
+</section>
+
+<section class="program" id="program">
+  <div class="section-num">II — Program</div>
+  <h2 class="section-title">1日を、<em>濃密に</em>設計する。</h2>
+  <p class="section-lead">
+    朝から夜まで、9時間の連続したセッション。講義・対話・個別相談・会食を織り交ぜ、参加者全員が「自社に戻った翌日から変えられる何か」を持ち帰るよう設計しています。
+  </p>
+
+  <div class="timeline">
+    <div class="time-row">
+      <div class="time-clock">10:00</div>
+      <div><div class="time-title">Welcome Reception</div></div>
+      <div class="time-desc">参加者同士の自己紹介と、1日の目的共有。ウェルカムドリンクとともに、静かに1日を始めます。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">10:30</div>
+      <div><div class="time-title">Session I — AIと経営の交差点</div></div>
+      <div class="time-desc">生成AI・機械学習の現在地と、経営における実装の解像度。ケーススタディを交えた90分の講義＋対話形式セッション。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">12:30</div>
+      <div><div class="time-title">Executive Lunch</div></div>
+      <div class="time-desc">シェフ監修のコースランチ。参加者同士の対話のための時間として設計しています。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">14:00</div>
+      <div><div class="time-title">Session II — データドリブン意思決定の構造</div></div>
+      <div class="time-desc">データを「見る」から「判断する」へ。独自の分析フレームワークを、参加者の課題に適用しながら解説します。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">16:00</div>
+      <div><div class="time-title">Session III — Private Consultation</div></div>
+      <div class="time-desc">参加者1名ごとに90分の個別セッション。自社の具体的な課題について、1対1で深く掘り下げます。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">17:30</div>
+      <div><div class="time-title">Networking Reception</div></div>
+      <div class="time-desc">同水準の経営者同士による、静かで深い対話の時間。一生のつながりが生まれる場として設計しています。</div>
+    </div>
+    <div class="time-row">
+      <div class="time-clock">19:00</div>
+      <div><div class="time-title">Private Dinner</div></div>
+      <div class="time-desc">1日の締めくくり。オフレコで語られる本音の対話を通じ、リトリートを完結させます。</div>
+    </div>
+  </div>
+</section>
+
+<section class="venue" id="venue">
+  <div class="section-num">III — Venue</div>
+  <h2 class="section-title">場が、<em>思考の質</em>を決める。</h2>
+
+  <div class="venue-grid">
+    <div class="venue-visual">
+      <div class="venue-visual-inner">
+        <div class="venue-visual-label">Tokyo · Akasaka</div>
+        <div class="venue-visual-name">Park Court<br>Akasaka<br><em>Hinokicho</em><br>The Tower</div>
+        <div class="venue-visual-meta">港区赤坂9-5-1</div>
+      </div>
+    </div>
+    <div class="venue-copy">
+      <h3>赤坂檜町、<br>東京随一の邸宅タワー。</h3>
+      <p>
+        六本木ミッドタウンに隣接し、檜町公園を見下ろす44階建ての超高級レジデンス。その上層階に位置する会員制ラウンジを、1日貸し切って開催します。
+      </p>
+      <p>
+        外界から遮断された静謐な空間、東京の夜景を望むパノラマ、手入れの行き届いた邸宅品質のしつらえ。この場で過ごす1日が、日常の意思決定とは異なる解像度を与えます。
+      </p>
+      <ul class="venue-specs">
+        <li><span class="label">所在地</span><span class="value">東京都港区赤坂9-5-1</span></li>
+        <li><span class="label">最寄駅</span><span class="value">六本木駅 徒歩4分 / 乃木坂駅 徒歩5分</span></li>
+        <li><span class="label">会場</span><span class="value">レジデンシャル・ラウンジ（貸切）</span></li>
+        <li><span class="label">ドレスコード</span><span class="value">Smart Casual</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="investment" id="investment">
+  <div class="section-num">IV — Investment</div>
+  <h2 class="section-title">1日で、<em>10年分</em>を動かす。</h2>
+  <p class="section-lead">
+    参加費には、会場・飲食・終日セッション・個別コンサルティング・アフターサポート・専用コミュニティへの永年アクセスまでを含みます。リトリート当日のみで完結しない、長期的な変化をつくる設計です。
+  </p>
+
+  <div class="breakdown">
+    <div class="break-row">
+      <div class="break-item">会場・ラウンジ終日貸切<span class="break-sub">Park Court Akasaka Hinokicho — Residential Lounge</span></div>
+      <div class="break-amt">¥80,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">昼食・ディナー・ドリンク<span class="break-sub">Chef's Course Lunch &amp; Private Dinner</span></div>
+      <div class="break-amt">¥60,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">終日セッション（計3セッション / 約6時間）<span class="break-sub">Lectures, Workshops &amp; Group Dialogue</span></div>
+      <div class="break-amt">¥240,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">個別コンサルティング（90分 / 1対1）<span class="break-sub">Private Consultation Session</span></div>
+      <div class="break-amt">¥120,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">3ヶ月間のアフターサポート<span class="break-sub">Post-Retreat Follow-up via Private Channel</span></div>
+      <div class="break-amt">¥100,000</div>
+    </div>
+    <div class="break-row">
+      <div class="break-item">エグゼクティブ・コミュニティ永年アクセス<span class="break-sub">Alumni Network &amp; Quarterly Gathering</span></div>
+      <div class="break-amt">¥50,000</div>
+    </div>
+    <div class="break-total">
+      <div class="break-item">TOTAL · 一括</div>
+      <div class="break-amt">¥650,000</div>
+    </div>
+  </div>
+</section>
+  <section class="host" id="host">
+  <div class="host-inner">
+    <div class="section-num">V — Host</div>
+    <h2 class="section-title">主宰</h2>
+    <p class="section-lead">
+      東京・銀座を拠点に、AI・データ分析の実装支援とエグゼクティブ教育プログラムを提供する独立系プロフェッショナルが主宰します。少人数・高密度の対話形式で、参加者一人ひとりの意思決定構造に深く関わります。
+    </p>
+
+    <div class="host-info">
+      <h4>俺トレ <span style="font-family:'Jost',sans-serif; font-size:14px; letter-spacing:0.3em; color:var(--ink-dim); margin-left:12px;">OreToré</span></h4>
+      <dl>
+        <dt>主宰</dt><dd>Yusuke（個人事業主）</dd>
+        <dt>事業内容</dt><dd>AI・データ分析の活用支援 / エグゼクティブ向け教育プログラム / コンテンツ制作</dd>
+        <dt>拠点</dt><dd>東京都中央区銀座</dd>
+        <dt>活動実績</dt><dd>Discord community 500+ / SNS total following 3,000+</dd>
+        <dt>ウェブサイト</dt><dd>oretore.jp</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="section-num">VI — Inquiries</div>
+  <h2 class="section-title">よくあるご質問</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">参加はどのように決定されますか？</div>
+    <div class="faq-a">お申込フォームでいただいたご経歴・参加意図を事務局にて確認のうえ、ご案内を差し上げます。選考結果は3営業日以内にご連絡いたします。同水準の参加者で構成するための選考制であり、ご返金事由には該当しません（不参加の場合、お支払いは発生しません）。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">支払いはどのように行いますか？</div>
+    <div class="faq-a">選考通過後、事務局より個別にStripe請求書をメール送付いたします。クレジットカード（VISA / Mastercard / AMEX / JCB）での1回払いに対応しております。銀行振込をご希望の方は個別にご相談ください。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">キャンセルポリシーを教えてください。</div>
+    <div class="faq-a">開催21日前まで：全額返金 / 開催14日前まで：50%返金 / 開催7日前まで：25%返金 / それ以降：返金不可。やむを得ない場合は次回開催への振替をご相談いただけます。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">服装の指定はありますか？</div>
+    <div class="faq-a">Smart Casualを推奨しております。ディナーセッションも含め、リラックスできる装いでご参加ください。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">機密保持について教えてください。</div>
+    <div class="faq-a">参加者全員に守秘義務に関する同意書へのサインをお願いしています。セッション内で共有された個別事業情報は、事務局および参加者間で厳密に保護されます。</div>
+  </div>
+</section>
+
+<section class="application" id="application">
+  <div class="app-pre">— Apply Now —</div>
+  <h2 class="app-title">その1日は、<br><em>取り戻せない。</em></h2>
+  <p class="app-lead">
+    各回6名限定の招待制プログラム。応募フォームにてご経歴と参加意図をお聞かせください。選考のうえ、事務局より個別にご連絡差し上げます。
+  </p>
+  <a href="mailto:apex@oretore.jp?subject=APEX%20Executive%20Intensive%20お申込" class="app-cta">Submit Application</a>
+  <p class="app-note">apex@oretore.jp まで直接ご連絡も可能です</p>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">APEX</div>
+      <p class="footer-desc">
+        Executive Intensive Tokyo<br>
+        Hosted by 俺トレ（OreToré）<br><br>
+        東京・赤坂で開催する<br>
+        1日完結型の招待制リトリート。
+      </p>
+    </div>
+    <div>
+      <div class="footer-title">Program</div>
+      <ul class="footer-list">
+        <li><a href="#invitation">招待について</a></li>
+        <li><a href="#program">プログラム</a></li>
+        <li><a href="#venue">会場</a></li>
+        <li><a href="#investment">参加費</a></li>
+        <li><a href="#faq">よくある質問</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-title">Contact</div>
+      <ul class="footer-list">
+        <li>俺トレ（OreToré）</li>
+        <li>東京都中央区銀座</li>
+        <li>apex@oretore.jp</li>
+        <li>平日 10:00 - 18:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legal-copy">
+    <strong>特定商取引法に基づく表記</strong>
+    <dl>
+      <dt>販売業者</dt><dd>Yusuke（屋号：俺トレ / OreToré）</dd>
+      <dt>運営統括責任者</dt><dd>Yusuke</dd>
+      <dt>所在地</dt><dd>東京都中央区銀座（ご請求があれば遅滞なく開示いたします）</dd>
+      <dt>連絡先</dt><dd>apex@oretore.jp（電話番号はご請求があれば遅滞なく開示いたします）</dd>
+      <dt>販売価格</dt><dd>¥650,000（税込）</dd>
+      <dt>商品代金以外の必要料金</dt><dd>なし（銀行振込の場合、振込手数料はお客様負担）</dd>
+      <dt>支払方法</dt><dd>クレジットカード決済（Stripe）、銀行振込</dd>
+      <dt>支払時期</dt><dd>請求書発行後14日以内</dd>
+      <dt>役務の提供時期</dt><dd>開催日当日（2026年6月21日）</dd>
+      <dt>キャンセル・返金</dt><dd>開催21日前まで全額返金 / 14日前まで50%返金 / 7日前まで25%返金 / それ以降返金不可</dd>
+      <dt>その他</dt><dd>参加時には本人確認書類のご持参をお願いします</dd>
+    </dl>
+  </div>
+
+  <div class="footer-bottom">
+    <div>© 2026 俺トレ（OreToré）. All rights reserved.</div>
+    <div>APEX · Executive Intensive Tokyo</div>
+  </div>
+</footer>
+
 </body>
 </html>
