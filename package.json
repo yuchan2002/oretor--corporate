@@ -1,9 +1,9 @@
 {
-  "name": "leviathan-lp",
+  "name": "apex-retreat",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "start": "node server.js"
+    "start": "npx -y serve -s . -l tcp://0.0.0.0:${PORT:-3000} --no-clipboard"
   },
-  "dependencies": {
-    "express": "^4.18.0"
-  }
+  "engines": { "node": ">=18" }
 }
